@@ -1,45 +1,71 @@
-console.log("Welcome to Calculator!");
 const rl = require(`readline-sync`);
+const MESSAGES = require(`./calculator_messages.json`);
+
+
+function prompt(message) {
+  console.log(message);
+  let answer = rl.prompt();
+
+  while (!answer){
+    console.log(MESSAGES[`validation`]);
+    console.log(message);
+    answer = rl.prompt()
+  }
+  return answer;
+}
 
 function invalidNumber(number) {
   return number.trimStart() === `` || Number.isNaN(Number(number));
 }
 
-// Ask the user for the first number.
-let firstNum = rl.question(`Please type in your first number:\n`);
+let name = prompt(MESSAGES[`welcome`]);
+console.log(`Thanks ${name}!!`)
 
-while (invalidNumber(firstNum)) {
-  firstNum = rl.question(`Hmm, that doesn't look like a valid number.`);
-}
-
-// Ask the user for the second number.
-let secondNum = rl.question(`Please type in your second number:\n`);
-
-while (invalidNumber(secondNum)) {
-  secondNum = rl.question(`Hmm, that doesn't look like a valid number.`);
-}
-console.log(`${firstNum} ${secondNum}`);
-
-// Ask the user for an operation to perform.
-let operator = rl.question(`What operator do you want to use on these numbers:\n`);
-
-while (![`+`, `-`, '*', `/`, `**`].includes(operator)) {
-  operator = rl.question(`Must choose: +, -, *, /, or **`);
-}
-
-// Perform the operation on the two numbers.
-
-function operation(operator) {
+function operation(firstNum, secondNum, operator) {
   switch (operator) {
-    case `+` : return firstNum + secondNum;
-    case `-` : return firstNum - secondNum;
-    case `*` : return firstNum * secondNum;
-    case `/` : return firstNum / secondNum;
-    case `**`: return firstNum ** secondNum;
-    default: return console.log(`Must be an operation.`);
+    case `+` : return parseInt(firstNum + secondNum);
+    case `-` : return parseInt(firstNum - secondNum);
+    case `*` : return parseInt(firstNum * secondNum);
+    case `/` : return parseInt(firstNum / secondNum);
+    case `**`: return parseInt(firstNum ** secondNum);
+    default: return console.log(MESSAGES[`notValidNum`]);
   }
 }
 
-let answer = operation(operator);
-// Print the result to the terminal.
-console.log(`The answer is: ${answer}`);
+function inputSelections() {
+  let firstNum = prompt(MESSAGES[`firstNum`])
+
+  while (invalidNumber(firstNum)) {
+    firstNum = prompt(MESSAGES[`notValidNum`]);
+  }
+
+  // Ask the user for the second number.
+  let secondNum = prompt(MESSAGES[`secondNum`])
+  
+  while (invalidNumber(secondNum)) {
+    secondNum = prompt(MESSAGES[`notValidNum`]);
+  }
+  console.log(`${firstNum} ${secondNum}`);
+  
+  // Ask the user for an operation to perform.
+  let operator = prompt(MESSAGES[`operator`]);
+  
+  while (![`+`, `-`, '*', `/`, `**`].includes(operator)) {
+    operator = prompt(MESSAGES[`validateOperator`]);
+  }
+  let answer = operation(firstNum, secondNum, operator);
+  // Print the result to the terminal.
+  console.log(`The answer is: ${answer}`);
+  let calcSelection = prompt(MESSAGES[`playAgain`]);
+
+  while (calcSelection === `y`) {
+    inputSelections();
+  }
+
+}
+
+
+inputSelections();
+
+
+

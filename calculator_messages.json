@@ -1,0 +1,11 @@
+{
+  "welcome": "Welcome to Calculator! Enter your name:",
+  "validation": "Make sure to enter a valid name.",
+  "firstNum": "What is your first number?\n",
+  "notValidNum": "Hmm, that doesn't look like a valid number.",
+  "secondNum": "Please type in your second number:\n",
+  "operator": "What operator do you want to use on these numbers:\n",
+  "validateOperator": "Must choose: +, -, *, /, or **",
+  "playAgain": "Would you like to perform another calculation? \nType 'y' for yes and 'n' for no."
+
+}
