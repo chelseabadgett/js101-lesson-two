@@ -1,6 +1,9 @@
-// the loan amount
-// the annual percentage rate (APR)
-// the loan duration
+/**
+ * the loan amount
+ * the annual percentage rate (APR)
+ * the loan duration
+ */
+
 
 /*
 ---------------------------------------------------------------------------
