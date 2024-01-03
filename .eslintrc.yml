@@ -1,6 +1,6 @@
 # Last update: 04 Dec 2023
 root: true
-parser: babel-eslint
+parser: @babel/eslint-parser
 parserOptions:
   ecmaFeatures:
     impliedStrict: true
